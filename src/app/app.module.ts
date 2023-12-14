@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChildComponent } from './child/child.component';
+import { SharableService } from './service/sharable.service';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { ChildComponent } from './child/child.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [SharableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
