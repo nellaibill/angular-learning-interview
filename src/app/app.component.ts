@@ -10,6 +10,8 @@ import { ChildComponent } from './child/child.component';
 export class AppComponent {
   title = 'angular-interview-questions';
   pageNumber =1;
+  databinding : string="data binding sample";
+  twoWayDatabinding : string="two data binding sample";
 
   /**
    *
@@ -26,5 +28,8 @@ export class AppComponent {
 
   viewChildClick():void{
     this.title =this.child.childProperty;
+  }
+  changeTextData(event :Event): void{
+    this.databinding ="text box value changed on keyup";
   }
 }
