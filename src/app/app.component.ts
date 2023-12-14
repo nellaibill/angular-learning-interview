@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular-interview-questions';
   pageNumber =1;
+
+  notifyParent() : void{
+    this.title="Notify Parent Clicked";
+  }
 }
