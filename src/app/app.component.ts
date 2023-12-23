@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
   pageNumber =1;
   databinding : string="data binding sample";
   twoWayDatabinding : string="two data binding sample";
+  authors=["Author1","Author2"];
 
   /**
    *
@@ -42,5 +43,21 @@ export class AppComponent implements OnInit{
   }
   changeTextData(event :Event): void{
     this.databinding ="text box value changed on keyup";
+  }
+
+  divClick():void{
+    console.log("div is clicked");
+  }
+  nameClick(name:string){
+    console.log(name);
+
+  }
+  saveClick($event:any){
+  $event.stopPropagation();
+    console.log("save is clicked");
+  }
+  onKeyUp(){
+    console.log("Key Enter is presse");
+
   }
 }
