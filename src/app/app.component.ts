@@ -1,13 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharableService } from './service/sharable.service';
 import { ChildComponent } from './child/child.component';
+import { UserService } from './service/user.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'angular-interview-questions';
   pageNumber =1;
   databinding : string="data binding sample";
@@ -16,9 +17,19 @@ export class AppComponent {
   /**
    *
    */
-  constructor(private sharableService: SharableService) {
+  constructor(private sharableService: SharableService,
+              private userService: UserService) {
     console.log("App Component",this.sharableService.currentPage);
 
+  }
+  ngOnInit(): void {
+    this.userService.getUsers().subscribe((users)=>{
+      console.log("users",users);
+    },
+    (error)=>{
+      console.log(error);
+    }
+    );
   }
   notifyParent(value : number) : void{
     this.title="Notify Parent Clicked" + value;

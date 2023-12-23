@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { ChildComponent } from './child/child.component';
 import { SharableService } from './service/sharable.service';
 import { FormsModule } from '@angular/forms';
+import { UserService } from './service/user.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,9 +17,10 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [SharableService],
+  providers: [SharableService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
