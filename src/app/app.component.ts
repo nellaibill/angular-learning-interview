@@ -8,5 +8,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class AppComponent
 {
+onclickFromChildComponent(data:string):void{
+  console.log(data);
 
+}
 }

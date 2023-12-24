@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoursesPipesComponent } from './courses-pipes.component';
 import { BasicConcepts1Component } from './basic-concepts1/basic-concepts1.component';
 import { CustomPipe } from './custom-pipe.component';
+import { BasicConcepts2Component } from './basic-concepts2/basic-concepts2.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CustomPipe } from './custom-pipe.component';
     ChildComponent,
     CoursesPipesComponent,
     BasicConcepts1Component,
-    CustomPipe
+    CustomPipe,
+    BasicConcepts2Component
   ],
   imports: [
     BrowserModule,
