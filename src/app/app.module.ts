@@ -8,11 +8,17 @@ import { SharableService } from './service/sharable.service';
 import { FormsModule } from '@angular/forms';
 import { UserService } from './service/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CoursesPipesComponent } from './courses-pipes.component';
+import { BasicConcepts1Component } from './basic-concepts1/basic-concepts1.component';
+import { CustomPipe } from './custom-pipe.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChildComponent
+    ChildComponent,
+    CoursesPipesComponent,
+    BasicConcepts1Component,
+    CustomPipe
   ],
   imports: [
     BrowserModule,
