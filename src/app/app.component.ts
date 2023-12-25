@@ -10,6 +10,6 @@ export class AppComponent
 {
 onclickFromChildComponent(data:string):void{
   console.log(data);
-
 }
+
 }

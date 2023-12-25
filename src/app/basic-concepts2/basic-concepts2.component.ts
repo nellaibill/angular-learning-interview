@@ -9,8 +9,14 @@ import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angu
 export class BasicConcepts2Component {
   @Input() name : string | undefined;
   @Output() childChange = new EventEmitter<string>();
-
+  courses : any;
   onChildClick():void{
     this.childChange.emit('Data sent From Child');
   }
+ loadCourses(){
+this.courses=[{id:1,name:'Test1'},{id:2,name:'Test2'},{id:3,name:'Test1'}]
+ }
+  trackByFunction(index:number,item:any):number{
+    return item.id;
+}
 }
