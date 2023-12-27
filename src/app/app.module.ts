@@ -14,6 +14,8 @@ import { CustomPipe } from './custom-pipe.component';
 import { BasicConcepts2Component } from './basic-concepts2/basic-concepts2.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
+import { PostsComponent } from './posts/posts.component';
+import { PostService } from './service/post.service';
 
 @NgModule({
   declarations: [
@@ -24,16 +26,17 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
     CustomPipe,
     BasicConcepts2Component,
     ContactFormComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [SharableService,UserService],
+  providers: [SharableService,UserService,PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
