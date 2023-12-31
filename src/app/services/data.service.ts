@@ -12,11 +12,7 @@ export class DataService {
   constructor(private httpClient: HttpClient) {}
 
   getAll() {
-    return this.httpClient.get(this.url).pipe(
-      map((response: any) => {
-        response;
-      })
-    );
+    return this.httpClient.get(this.url);
   }
   create(resource: any) {
     return this.httpClient.post(this.url, JSON.stringify(resource));

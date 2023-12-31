@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SharableService } from '../service/sharable.service';
+import { SharableService } from '../services/sharable.service';
 
 @Component({
   selector: 'app-child',

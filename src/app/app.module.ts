@@ -4,9 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChildComponent } from './child/child.component';
-import { SharableService } from './service/sharable.service';
+import { SharableService } from './services/sharable.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserService } from './service/user.service';
+import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CoursesPipesComponent } from './courses-pipes.component';
 import { BasicConcepts1Component } from './basic-concepts1/basic-concepts1.component';
@@ -15,8 +15,12 @@ import { BasicConcepts2Component } from './basic-concepts2/basic-concepts2.compo
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { PostsComponent } from './posts/posts.component';
-import { PostService } from './service/post.service';
+import { PostService } from './services/post.service';
 import { AppErrorHandler } from './common/app-error-hander';
+import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,9 @@ import { AppErrorHandler } from './common/app-error-hander';
     ContactFormComponent,
     SignupFormComponent,
     PostsComponent,
+    HomeComponent,
+    NotFoundComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +43,20 @@ import { AppErrorHandler } from './common/app-error-hander';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: 'posts/:id',
+        component: PostsComponent,
+      },
+      {
+        path: '**',
+        component: NotFoundComponent,
+      },
+    ]),
   ],
   providers: [
     SharableService,

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SharableService } from '../service/sharable.service';
+import { SharableService } from '../services/sharable.service';
 import { ChildComponent } from '../child/child.component';
-import { UserService } from '../service/user.service';
+import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-basic-concepts1',
   templateUrl: './basic-concepts1.component.html',
