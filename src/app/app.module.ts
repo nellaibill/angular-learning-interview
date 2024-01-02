@@ -7,7 +7,7 @@ import { ChildComponent } from './child/child.component';
 import { SharableService } from './services/sharable.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CoursesPipesComponent } from './courses-pipes.component';
 import { BasicConcepts1Component } from './basic-concepts1/basic-concepts1.component';
 import { CustomPipe } from './custom-pipe.component';
@@ -21,6 +21,9 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
+import { AuthInterceptorService } from './services/auth-interceptor-service';
+import { AuthComponent } from './auth/auth-component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { RouterModule } from '@angular/router';
     PostsComponent,
     HomeComponent,
     NotFoundComponent,
-    NavbarComponent
+    NavbarComponent,
+    AuthComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,10 @@ import { RouterModule } from '@angular/router';
         component: PostsComponent,
       },
       {
+        path: 'login',
+        component: AuthComponent,
+      },
+      {
         path: '**',
         component: NotFoundComponent,
       },
@@ -63,6 +72,11 @@ import { RouterModule } from '@angular/router';
     UserService,
     PostService,
     { provide: ErrorHandler, useClass: AppErrorHandler },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
