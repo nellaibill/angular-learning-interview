@@ -17,7 +17,7 @@ export class AuthService {
   isLoggedIn = false;
   //userSub = new Subject<User>();
   userSub = new BehaviorSubject<User>(new User('', '', '', new Date()));
-  constructor(private http: HttpClient,private router:Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   signUp(email: string, password: string) {
     return this.http
@@ -52,6 +52,7 @@ export class AuthService {
       expiryDate
     );
     this.userSub.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
   }
   getErrorHandler(errorRes: HttpErrorResponse) {
     let errorMessage = 'An Error Occured';
@@ -62,8 +63,27 @@ export class AuthService {
   }
   logout() {
     this.userSub.next(new User('', '', '', new Date()));
-    this.router.navigate(['/auth'])
-    this.isLoggedIn=false;
+    this.router.navigate(['/auth']);
+    this.isLoggedIn = false;
+  }
+  autoLogin() {
+
+    const localStorageData: string | null = localStorage.getItem('userData');
+
+    const parsedUserData: any = JSON.parse(localStorageData|| '{}');
+
+    if (!parsedUserData) {
+      return;
+    }
+    let user = new User(
+      parsedUserData.email,
+      parsedUserData.localId,
+      parsedUserData._token,
+      new Date(parsedUserData.expirationDate)
+    );
+    if (user.getToken()) {
+      this.userSub.next(user);
+    }
   }
   isAuthenticated() {
     return new Promise((resolve, reject) => {

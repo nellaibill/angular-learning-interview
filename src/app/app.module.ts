@@ -14,7 +14,7 @@ import { CustomPipe } from './custom-pipe.component';
 import { BasicConcepts2Component } from './basic-concepts2/basic-concepts2.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
-import { PostsComponent } from './posts/posts.component';
+import { PostsComponent } from './modules/posts.component';
 import { PostService } from './services/post.service';
 import { AppErrorHandler } from './common/app-error-hander';
 import { HomeComponent } from './home/home.component';
@@ -25,6 +25,8 @@ import { AuthInterceptorService } from './services/auth-interceptor-service';
 import { AuthComponent } from './auth/auth-component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner.component';
 import { AuthTokenInterceptorService } from './services/auth-token-interceptor.service';
+import { AuthGuard } from './guard/auth.guard';
+import { PostsModule } from './modules/posts.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,6 @@ import { AuthTokenInterceptorService } from './services/auth-token-interceptor.s
     BasicConcepts2Component,
     ContactFormComponent,
     SignupFormComponent,
-    PostsComponent,
     HomeComponent,
     NotFoundComponent,
     NavbarComponent,
@@ -49,10 +50,12 @@ import { AuthTokenInterceptorService } from './services/auth-token-interceptor.s
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    PostsModule,
     RouterModule.forRoot([
       {
         path: '',
         component: HomeComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'posts/:id',
@@ -65,6 +68,11 @@ import { AuthTokenInterceptorService } from './services/auth-token-interceptor.s
       {
         path: '**',
         component: NotFoundComponent,
+      },
+      {
+        path: 'posts',
+        loadChildren: () =>
+          import('../app/modules/posts.module').then((m) => m.PostsModule),
       },
     ]),
   ],
