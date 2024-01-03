@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthResponseData, AuthService } from '../services/auth.service';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class AuthComponent {
   isLoginMode = true;
   isLoading = false;
   error = null;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
@@ -20,22 +22,31 @@ export class AuthComponent {
       return;
     }
     this.isLoading = true;
+    let authObs: Observable<AuthResponseData>;
     if (this.isLoginMode) {
+      authObs = this.authService.login(
+        authForm.value.email,
+        authForm.value.password
+      );
     } else {
-      this.authService
-        .signUp(authForm.value.email, authForm.value.password)
-        .subscribe(
-          (response) => {
-            console.log(response);
-            this.isLoading = false;
-          },
-          (errorMessage) => {
-            this.isLoading = false;
-            this.error = errorMessage;
-          }
-        );
+      authObs = this.authService.signUp(
+        authForm.value.email,
+        authForm.value.password
+      );
     }
+    authObs.subscribe(
+      (response) => {
+        console.log(response);
+        this.isLoading = false;
+        this.router.navigate(['/']);
+      },
+      (errorMessage) => {
+        this.isLoading = false;
+        this.error = errorMessage;
+      }
+    );
   }
+
   getPasswordErrors(password: any) {
     if (password?.errors?.['required']) {
       return 'Password is required';

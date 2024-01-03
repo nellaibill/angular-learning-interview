@@ -24,6 +24,7 @@ import { RouterModule } from '@angular/router';
 import { AuthInterceptorService } from './services/auth-interceptor-service';
 import { AuthComponent } from './auth/auth-component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner.component';
+import { AuthTokenInterceptorService } from './services/auth-token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner.component';
         component: PostsComponent,
       },
       {
-        path: 'login',
+        path: 'auth',
         component: AuthComponent,
       },
       {
@@ -75,6 +76,11 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptorService,
       multi: true,
     },
   ],

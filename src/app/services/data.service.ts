@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class DataService {
-  private url = 'https://jsonplaceholder.typicode.com/posts';
+  private url = 'https://instamobile--signin-8f73e-default-rtdb.firebaseio.com/posts.json';
 
   constructor(private httpClient: HttpClient) {}
 

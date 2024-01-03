@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -12,10 +13,16 @@ export class PostsComponent implements OnInit {
   constructor(
     private service: PostService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
   ngOnInit(): void {
     let comb = combineLatest([this.route.paramMap, this.route.queryParamMap]);
+
+    this.authService.userSub.subscribe((users) => {
+       console.log('post', users);
+    });
+
 
     comb.subscribe((params) => {
       console.log(params[0].get('id'));
