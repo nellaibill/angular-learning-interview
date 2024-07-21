@@ -25,7 +25,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
@@ -93,11 +93,70 @@
             ],
             "scripts": []
           }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "angular-interview-questions:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular-interview-questions:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "angular-interview-questions:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "angular-interview-questions:serve:development"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "angular-interview-questions:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular-interview-questions:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "5512830e-19dd-43a9-986f-d8acb81b5035"
+    "analytics": "5512830e-19dd-43a9-986f-d8acb81b5035",
+    "schematicCollections": [
+      "@angular-eslint/schematics",
+      "@cypress/schematic",
+      "@schematics/angular"
+    ]
   }
 }

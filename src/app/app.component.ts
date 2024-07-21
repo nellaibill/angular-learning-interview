@@ -1,15 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent
-{
-onclickFromChildComponent(data:string):void{
-  console.log(data);
-}
-
+export class AppComponent {
+  title = 'to-remove';
+employees: string|any[]|null|undefined;
 }

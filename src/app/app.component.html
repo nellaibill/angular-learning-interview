@@ -1,28 +1,21 @@
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <navbar></navbar>
-    </div>
-
-    <div class="col-md-9">
-      <div class="row">
-        <div class="col-md-12">
-          <router-outlet></router-outlet>
-        </div>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/employees">Employees</a>
+        </li>
+      </ul>
     </div>
   </div>
-</div>
+</nav>
 
-<!--
-<app-posts></app-posts>
-
-<signup-form></signup-form>
-contact-form></contact-form>
-<app-basic-concepts2  (childChange)="onclickFromChildComponent($event)">
-<p class="header">Test Encapsulation</p>
-<p>Test 1</p>
-</app-basic-concepts2>
 <router-outlet></router-outlet>
--->
