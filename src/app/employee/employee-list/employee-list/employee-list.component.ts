@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../employee.service';
 import { Router } from '@angular/router';
 
@@ -11,6 +11,7 @@ export class EmployeeListComponent implements OnInit {
   employees: any[] = [];
   filterEmployees: any[] = [];
   selectedEmployeeId: any;
+  recentAccesedEmployees:any[] = [];
   constructor(
     private employeeService: EmployeeService,
     private router: Router
@@ -23,10 +24,12 @@ export class EmployeeListComponent implements OnInit {
   }
   viewEmployeeDetails(employee: any) {
     //this.router.navigate(['/employee', employee.id]);
+    this.recentAccesedEmployees.push('parent'+employee.id);
     this.selectedEmployeeId = employee.id;
   }
 
   deleteEmployee(employeeId: number) {
+    this.selectedEmployeeId = employeeId;
     this.employeeService.deleteEmployee(employeeId);
   }
   applyFilter(event: Event) {

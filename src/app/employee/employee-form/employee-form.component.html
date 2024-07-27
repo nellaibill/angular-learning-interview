@@ -15,7 +15,10 @@
       Name is required
     </div>
   </div>
-  <button type="submit" [disabled]="employeeForm.invalid">Submit</button>
-  <button type="submit" (click)="test()">Test</button>
+  <button type="submit" [disabled]="employeeForm.invalid">Submit</button><br/><br/>
+  <button type="submit" (click)="learnObservableOperators()">LearnObservableOperators</button><br/><br/>
+  <button type="submit" (click)="learnWebWorker()">LearnWebWorker</button><br/><br/>
+  <div>{{ userInput }}</div><br/><br/>
+  <div [innerHTML]="userInput"></div>
   <br /><br />
 </form>

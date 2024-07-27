@@ -1,6 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  forkJoin,
+  interval,
+  map,
+  Observable,
+  of,
+  retry,
+  switchMap,
+  takeWhile,
+  tap,
+} from 'rxjs';
+import { environment } from 'src/environments/environment';
 //import { Employee } from './Employee';
 
 @Injectable({
@@ -14,6 +27,9 @@ export class EmployeeService {
   private employeeSubject = new BehaviorSubject<{ id: number; name: string }[]>(
     [{ id: 1000, name: 'John Doe' }]
   );
+  private baseUrl = 'https://reqres.i/api/users/';
+
+  combinedResult: any[] = [];
   public employee$ = this.employeeSubject.asObservable();
   private currentId = 1001; // Start ID
   getEmployees(): Observable<{ id: number; name: string }[]> {
@@ -42,9 +58,44 @@ export class EmployeeService {
     return of(employee);
   }
 
-  private apiUrl = 'https://reqres.in/ap/users?page=2';
+  private apiUrl = environment.apiUrl;
 
-  getUsers(): Observable<any[]> {
+
+  getUsers(): Observable<any> {
+        return this.http.get<any>(this.baseUrl).pipe(
+          retry(2),
+          map((response) => response.data),
+          catchError(error => of([console.log(error)])) // Access the 'data' property if needed
+        );
+
+  }
+  getUserswithIntervals(): Observable<any> {
+    let userId = 1;
+
+    return interval(5).pipe(
+      takeWhile(() => userId <= 5),
+      switchMap(() => {
+        const apiUrl = `${this.baseUrl}${userId++}`;
+        return this.http.get<any>(apiUrl).pipe(
+          map((response) => response.data) // Access the 'data' property if needed
+        );
+      })
+    );
+  }
+  getUsersForkJoin(): Observable<any[]> {
+    const api1 = this.http.get<any>('https://reqres.in/api/users?page=1').pipe(
+      map((response) => response.data) // Access the 'data' property
+    );
+    const api2 = this.http.get<any>('https://reqres.in/api/users?page=2').pipe(
+      map((response) => response.data) // Access the 'data' property
+    );
+
+    forkJoin(api1, api2).subscribe((res) => {
+      this.combinedResult = [...res[0], ...res[1]];
+    });
+    return of(this.combinedResult);
+  }
+  getUsersWithTapCatchError(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl).pipe(
       tap((users) => console.log(users)),
       catchError((error) => {

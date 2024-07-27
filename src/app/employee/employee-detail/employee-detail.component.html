@@ -1,3 +1,6 @@
 <div *ngIf="employee">
   <h2>{{ employee.name }}</h2>
+  <button (click)="subscribeFromChild()">Subscribe</button>
+  {{recentAccesedEmployees.length}}
+  <p *ngFor="let str of recentAccesedEmployees">{{str}}</p>
 </div>
