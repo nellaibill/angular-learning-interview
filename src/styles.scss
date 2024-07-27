@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+/* styles.css or styles.scss */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "/src/styles/profile";
+$primary_color : rgb(160, 160, 212);
+$secondary_color : red;
+$third_color : rgb(225, 225, 17);
+
+.heading{
+  color: $primary_color;
+}
+h1{
+  color: $primary_color;
+}
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li{
+    background-color: $primary_color;
+    a{
+      color: $secondary_color;
+    }
+    a:hover{
+      background-color: $third_color;
+    }
+  }
+}

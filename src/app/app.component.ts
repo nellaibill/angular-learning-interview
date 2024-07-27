@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-interview-questions';
-  pageNumber =1;
+  title = 'to-remove';
+employees: string|any[]|null|undefined;
 }

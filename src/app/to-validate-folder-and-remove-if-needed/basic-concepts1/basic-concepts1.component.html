@@ -1,0 +1,24 @@
+<h1>{{title}}</h1>
+<app-child [pageNumber]="pageNumber" (notifyParent)="notifyParent($event)"></app-child><br/><br/>
+<button (click)="viewChildClick()">View child</button><br/><br/>
+
+<input type="text" [value]="databinding" onkeyup="changeTextData()"><br/><br/>
+<input type="text" [(ngModel)] ="twoWayDatabinding"><br/><br/>
+{{twoWayDatabinding}}
+<a [routerLink]="['/child']">Go to child</a><br/>
+<ul>
+  *ngFor Assignment
+<li *ngFor="let author of authors">
+{{author}}
+</li>
+</ul>
+Key Filtering <input type="text"(keyup.enter)="onKeyUp()"/>
+  <br/>
+ Template Reference <input type="text" #template_name/> <br/><br/>
+  <button class="btn btn-primary" (click)="nameClick(template_name.value)">Name Click</button> <br/><br/>
+
+  Event Bubbling :
+<div (click)="divClick()">
+
+<button class="btn btn-primary" (click)="saveClick($event)">Save</button>
+</div>

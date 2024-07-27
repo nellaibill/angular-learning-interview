@@ -3,18 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChildComponent } from './child/child.component';
+import { EmployeeModule } from './employee/employee.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+import { AuthTokenInterceptorInterceptor } from './auth-token-interceptor.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ChildComponent
+  declarations: [AppComponent, LoginComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, EmployeeModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptorInterceptor,
+      multi: true,
+    },
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

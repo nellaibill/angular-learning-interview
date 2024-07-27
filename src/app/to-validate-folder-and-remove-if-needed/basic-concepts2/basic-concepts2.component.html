@@ -1,0 +1,11 @@
+<p>basic-concepts2 works!</p>
+<ng-content select=".header"></ng-content>
+<ng-content></ng-content>
+<button (click)="onChildClick()"> Save</button><br/>
+<button (click)="loadCourses()">Load Courses</button>
+<ul>
+    <li *ngFor="let course of courses; trackBy: trackByFunction">
+        {{course.name}}
+    </li>
+</ul>
+{{name}}
